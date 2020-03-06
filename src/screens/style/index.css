@@ -1,0 +1,40 @@
+/* VARIABLES */
+
+:root {
+  --primary: #212b3e;
+  --primary-dark: #141e31;
+  --secondary: #535c6e;
+  --secondary-dark: #727e96;
+
+  --logo-text: #997b0a;
+
+  --link-color-primary: #007bff;
+  --link-color-secondary: #f9f9f9;
+  --link-color-secondary-dark: #adadad;
+  --link-color-tertiary:#877bff;
+}
+
+@font-face{
+  font-family: OpenFacePro;
+  src: url(./fonts/OpenfacePro.otf);
+}
+
+/* GENERAL SETTINGS */
+
+body{
+  margin: 0;
+  padding: 0;
+}
+a, Nav.Item {
+  color: var(--link-color-primary);
+}
+
+.logo-text a{
+  color: var(--logo-text);
+  font-family: OpenFacePro;
+  font-size: larger;
+  text-shadow: aliceblue 0 0 .4px;
+}
+.logo-text a:hover{
+  text-decoration: none;
+}

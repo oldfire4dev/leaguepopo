@@ -1,0 +1,29 @@
+@import './index.css';
+
+/* GENERAL SETTINGS */
+
+body{
+  background-color: var(--primary);
+}
+
+a {
+  color: var(--link-color-secondary);
+}
+
+/* EDITS */
+
+.navmenu, .logo-part{
+  background-color: var(--primary-dark);
+}
+.navmenu a{ color: var(--link-color-secondary-dark); border-bottom: solid 4px transparent; }
+.navmenu a:hover{
+  border-bottom: solid 4px var(--logo-text);
+  color: var(--link-color-secondary);
+  transition: .1s;
+}
+
+.content{
+  
+}
+
+
