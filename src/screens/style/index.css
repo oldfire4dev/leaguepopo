@@ -28,6 +28,10 @@ body{
 a, Nav.Item {
   color: var(--link-color-primary);
 }
+button{ transition: .1s; }
+button:hover{ cursor: pointer; }
+button:active{ border: none; }
+button:focus { outline:0; }
 
 .logo-text a{
   color: var(--logo-text);

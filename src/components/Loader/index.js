@@ -5,6 +5,7 @@ import {
   Spinner
 } from 'react-bootstrap';
 
+import './../style/Loader.css';
 class Loader extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +15,7 @@ class Loader extends Component {
   }
   render() { 
     return ( 
-      <div className="d-flex justify-content-center">
+      <div className="loader">
         <Button variant="primary" disabled>
           <Spinner
             as="span"
