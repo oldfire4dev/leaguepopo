@@ -7,7 +7,8 @@ import {
   InputGroup,
   DropdownButton,
   Dropdown,
-  FormControl
+  FormControl,
+  CardGroup, Card
 } from 'react-bootstrap';
 
 import {
@@ -23,6 +24,7 @@ export default class Home extends Component {
     super(props);
     this.state = { 
       isLoading: true,
+      contentIsLoading: true,
       summonerName: null,
       server: 'Servidor',
       msg: null
@@ -43,6 +45,12 @@ export default class Home extends Component {
     })
   }
 
+  contentLoader = () => {
+    $( document ).ready(() => {
+      this.setState({ contentIsLoading: false })
+    })
+  }
+
   championV3 = async () => {
     let request = await fetch('/champion/freeweek');
     let body = request.json();
@@ -53,7 +61,9 @@ export default class Home extends Component {
   componentDidMount = () => {
     this.loader();
     this.championV3().then(res=>{
-      this.setState({ msg: res.zed })
+      this.setState({ msg: res.ids })
+      console.log(this.state.msg)
+      this.contentLoader();
     })
     .catch(err => console.log(err));
   }
@@ -113,12 +123,39 @@ export default class Home extends Component {
               </Link>
             </div>
           </div>
-          <div>
-            <h2>{this.state.msg}</h2>
+          <div className="row">
+            <div className="col-md-10">
+              <CardGroup className="rounded">
+                <Card>
+                <Card.Body>
+                  <Card.Title>Card title</Card.Title>
+                  <Card.Text>
+                    This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This content is a little bit longer.
+                    {!this.state.contentIsLoading ? this.state.msg.forEach((res) => {
+                    return (<h2>{res}</h2>)
+                    })
+                      :
+                      null
+                    }
+                  </Card.Text>
+                </Card.Body>
+                </Card>
+                <Card>
+                  <Card.Body>
+                    <Card.Title>Card title</Card.Title>
+                    <Card.Text>
+                      This card has supporting text below as a natural lead-in to additional
+                      content.{' '}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </CardGroup>
+            </div>
           </div>
         </div>
         {/** CONTENT PART END */}
       </div>
-     );
+      );
   }
 }

@@ -10,7 +10,7 @@ getChampionFreeWeek = (req, res) => {
       .region(kayn.regions.BRAZIL)
       .then(Champion => {
           let ids = Champion.freeChampionIds;
-          return res.send({ id: ids })
+          return res.send({ ids })
       }) .catch (err => {
             console.log(err)
       })
