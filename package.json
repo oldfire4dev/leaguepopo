@@ -9,7 +9,8 @@
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "kayn": "0.10.2"
   },
   "devDependencies": {
     "concurrently": "^5.1.0"
