@@ -1,0 +1,11 @@
+@import './../../screens/style/index.css';
+
+
+/* EDITS */
+
+.content-loader {
+  position: absolute;
+  left:50%;
+  right: 50%;
+  z-index: 999;
+}

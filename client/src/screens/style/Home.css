@@ -56,3 +56,16 @@ html, body {
   transform: translateY(-5px);
 }
 
+.champions-img{
+  width: 7rem;
+  height: 6rem;
+  pointer-events: none;
+}
+.champions-name{
+  font-weight: 900;
+  font-size: 1.7rem;
+}
+.champions-relative-position{
+  position: relative;
+  padding: 5rem;
+}
