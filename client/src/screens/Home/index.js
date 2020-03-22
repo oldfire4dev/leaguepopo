@@ -8,8 +8,9 @@ import {
   DropdownButton,
   Dropdown,
   FormControl,
-  CardGroup, Card
+  ListGroup, Card
 } from 'react-bootstrap';
+
 
 import {
   Link
@@ -18,6 +19,7 @@ import {
 import './../style/Home.css';
 import ServerList from './../../config/api/servers.json';
 import Loader from './../../components/Loader';
+import ContentLoader from './../../components/ContentLoader';
 import Logo from './../../assets/logo.png'
 export default class Home extends Component {
   constructor(props) {
@@ -27,7 +29,7 @@ export default class Home extends Component {
       contentIsLoading: true,
       summonerName: null,
       server: 'Servidor',
-      msg: null
+      championFkList: null
     }
   }
 
@@ -53,7 +55,7 @@ export default class Home extends Component {
 
   championV3 = async () => {
     let request = await fetch('/champion/freeweek');
-    let body = request.json();
+    let body = await request.json();
     if (request.status !== 200) throw Error(body.message);
     return body;
   }
@@ -61,8 +63,19 @@ export default class Home extends Component {
   componentDidMount = () => {
     this.loader();
     this.championV3().then(res=>{
-      this.setState({ msg: res.ids })
-      console.log(this.state.msg)
+      let url = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/";
+      let test = res.names.map((body, index) => {
+        console.log(body)
+        return (
+          <>
+            <ListGroup.Item key={index} className="row">
+              <img src={url + body.data.name + '_0.jpg'} alt="Champions Free Week" className="rounded champions-img" />
+              <span className="ml-3 champions-name">{body.data.name}</span>
+            </ListGroup.Item>
+          </>
+        );
+      })
+      this.setState({ championFkList: test })
       this.contentLoader();
     })
     .catch(err => console.log(err));
@@ -123,34 +136,21 @@ export default class Home extends Component {
               </Link>
             </div>
           </div>
-          <div className="row">
+          <div className="row justify-content-center champions-fk-list">
             <div className="col-md-10">
-              <CardGroup className="rounded">
-                <Card>
-                <Card.Body>
-                  <Card.Title>Card title</Card.Title>
-                  <Card.Text>
-                    This is a wider card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
-                    {!this.state.contentIsLoading ? this.state.msg.forEach((res) => {
-                    return (<h2>{res}</h2>)
-                    })
-                      :
-                      null
-                    }
-                  </Card.Text>
-                </Card.Body>
-                </Card>
-                <Card>
-                  <Card.Body>
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>
-                      This card has supporting text below as a natural lead-in to additional
-                      content.{' '}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </CardGroup>
+              <div className="row justify-content-center">
+                <h3 style={{ color: '#fff', margin: '5rem 0 5rem 0',}}>Campeões Semanais Grátis</h3>
+              </div>
+              <ListGroup className="rounded col-md-11 mx-auto ">
+                {
+                this.state.contentIsLoading?
+                  <ListGroup.Item key="1" className="row champions-relative-position">
+                    <ContentLoader />
+                  </ListGroup.Item>
+                    :
+                  this.state.championFkList
+                }
+              </ListGroup>
             </div>
           </div>
         </div>
