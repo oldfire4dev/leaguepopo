@@ -113,7 +113,7 @@ export default class Home extends Component {
           </div>
           <div className="row justify-content-center my-5">
             <div>
-              <InputGroup className="mb-3">
+              <InputGroup className="mb-3" >
                 <DropdownButton
                   as={InputGroup.Prepend}
                   variant="outline-secondary"
@@ -125,7 +125,7 @@ export default class Home extends Component {
                   )}
                   <Dropdown.Item href="#">Another action</Dropdown.Item>
                 </DropdownButton>
-                <FormControl aria-describedby="basic-addon1" placeholder="Invocador" title="Nome do invocador" onChange={(val) => { this.getSummoner(val.target.value) }} />
+                <FormControl name="summonerName" aria-describedby="basic-addon1" placeholder="Invocador" title="Nome do invocador" onChange={(val) => { this.getSummoner(val.target.value) }} />
               </InputGroup>
             </div>
             <div className="ml-3 wrap">
