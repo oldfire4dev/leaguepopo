@@ -13,7 +13,7 @@ app.get('/champion/freeweek', getChampionFreeWeek)
 
 app.get('/', function(req, res) {
 
-    const dd = req.body
+    const dd = req.body.summonerName
 
     res.send(dd)
 
