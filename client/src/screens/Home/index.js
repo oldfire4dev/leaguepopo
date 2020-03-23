@@ -53,6 +53,11 @@ export default class Home extends Component {
     })
   }
 
+  sendToSummonerV4API = async () => {
+    const send_to_api = await fetch(`/dashboard/${this.state.server}/${this.state.summonerName}`);
+    return send_to_api;
+  }
+
   championV3 = async () => {
     let request = await fetch('/champion/freeweek');
     let body = await request.json();
@@ -65,7 +70,6 @@ export default class Home extends Component {
     this.championV3().then(res=>{
       let url = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/";
       let test = res.names.map((body, index) => {
-        console.log(body)
         return (
           <>
             <ListGroup.Item key={index} className="row">
@@ -121,7 +125,7 @@ export default class Home extends Component {
                   id="input-group-dropdown-1"
                 >
                   {ServerList.Servers.map((res) => 
-                    <Dropdown.Item key={res.id} onClick={() => {this.getServer(res.serverId)}}>{res.serverId}</Dropdown.Item>
+                    <Dropdown.Item key={res.id} onClick={() => {this.getServer(res.region)}}>{res.serverId}</Dropdown.Item>
                   )}
                   <Dropdown.Item href="#">Another action</Dropdown.Item>
                 </DropdownButton>
@@ -130,7 +134,7 @@ export default class Home extends Component {
             </div>
             <div className="ml-3 wrap">
               <Link to={`/dashboard?server=${this.state.server}&summonerName=${this.state.summonerName}`} >
-                <button className='btn-go'>
+                <button className='btn-go' onClick={() => this.sendToSummonerV4API()}>
                   Buscar
                 </button>
               </Link>

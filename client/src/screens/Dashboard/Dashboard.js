@@ -14,6 +14,7 @@ export default class Dashboard extends Component {
     super(props);
     this.state = { 
       isLoading: true,
+      summonerInfoData: [],
     }
   }
 
@@ -21,6 +22,12 @@ export default class Dashboard extends Component {
     let server = this.props.query.get('server');
     let summonerName = this.props.query.get('summonerName');
     return { server, summonerName }
+  }
+
+  getSummonerInfo = async () => {
+    const response = await fetch(`/dashboard/${this.getParams().server}/${this.getParams().summonerName}`);
+    const body = await response.json();
+    this.setState({ summonerInfoData: body })
   }
 
   loader = () => {
@@ -31,9 +38,10 @@ export default class Dashboard extends Component {
 
   componentDidMount = () => {
     this.loader();
+    this.getSummonerInfo();
   }
 
-  render() { 
+  render() {
     return (
       this.state.isLoading ?
       <Loader/> 
@@ -59,6 +67,11 @@ export default class Dashboard extends Component {
         {/** CONTENT PART */}
         <div className="content container-fluid">
           <div>
+            <div>
+              <div>
+                <img className="rounded-circle summoner-img" src={this.state.summonerInfoData.ImgURL} alt="Summoner Profile Icon" />
+              </div>
+            </div>
             <h2>{this.getParams().server}</h2>
             <h2>{this.getParams().summonerName}</h2>
           </div>

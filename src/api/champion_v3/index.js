@@ -1,9 +1,6 @@
 //import React from 'react';
 const kayn = require('./../setting');
 
-const url = 'https://br1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=';
-
-
 getChampionFreeWeek = async (req, res) => {
 
   const body = await kayn.kaynObject.DDragon.Champion.listDataByIdWithParentAsId()
