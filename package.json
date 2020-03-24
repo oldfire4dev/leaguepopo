@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "kayn": "0.10.2"
+    "kayn": "0.10.2",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "concurrently": "^5.1.0"
