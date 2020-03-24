@@ -25,6 +25,7 @@ a {
   position: absolute;
   cursor: default;
   pointer-events: none;
+  /* border-image: url(); */
   left: 8rem;
   top: 9rem;
   background-color: #fff;
