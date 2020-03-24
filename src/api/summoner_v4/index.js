@@ -6,8 +6,16 @@ getSummonerInfo = (req, res) => {
   getSummonerId(req).then(data => {
     getSummonerLeague(server, data.id).then( league => {
       getSummonerMatch(server, data.id).then( body => {
-        const summonerInfo = {data, body};
-        console.log(summonerInfo);
+        console.log(data)
+        const summonerInfo = {data, body, league};
+        res.json({
+          summonerId: data.id,
+          summonerName: data.name,
+          summonerLevel: data.summonerLevel,
+          ImgURL: urlProfileIcon+data.profileIconId+'.png',
+          league,
+
+          });
       }).catch(err => console.log(err))
     }).catch(err => console.log(err))
   }).catch(err => console.log(err))
