@@ -8,20 +8,21 @@ getSummonerInfo = (req, res) => {
     getSummonerLeague(server, data.id).then(league => {
       getSummonerMatch(server, data.accountId).then(match => {
 
-        let value;
+        var value;
         match.matches.forEach(matchIds => {
-            value = global.getSummonerMatchInfos(matchIds.gameId).then(matchInfo => {
+            value = getSummonerMatchInfos(matchIds.gameId).then(matchInfo => {
             // const tftmatch = `https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/L4YT-Xjeczf4h6eJTqiMv2VLEGnDezs3e3glj73gnTcbj6JfHHHSLa-grdZICrQj6Dl6Uc-Dmg90xA/ids?count=20&api_key=RGAPI-f84120c7-9c8f-475d-890c-f0692fd50849`
             // fetch(tftmatch)
             // .then(response => response.json())
-            // .then(match => console.log(match))    
-            window.testing = matchInfo
+            // .then(match => console.log(match))
             
           })
           
         })
-        
-        console.log(window.testing)
+
+        value.then(response => {
+          console.log(response)
+        })
 
         res.json({
           summonerId: data.id,

@@ -6,6 +6,7 @@ import {
 } from 'react-bootstrap';
 import $ from 'jquery';
 
+import './../style/Dashboard.css';
 import Loader from './../../components/Loader';
 import Logo from './../../assets/logo.png'
 
@@ -66,15 +67,17 @@ export default class Dashboard extends Component {
         {/** HEADER PART END */}
         {/** CONTENT PART */}
         <div className="content container-fluid">
-          <div>
-            <div>
-              <div>
+          <div className="row justify-content-center">
+            <div className="col-md-11 col-sm-11 col-12 summoner-info-area">
+              <div className="row">
                 <img className="rounded-circle summoner-img" src={this.state.summonerInfoData.ImgURL} alt="Summoner Profile Icon" />
+                <span className="summoner-level rounded-circle">{this.state.summonerInfoData.summonerLevel}</span>
+              </div>
+              <div>
+                <h3 className="summoner-name" >{this.state.summonerInfoData.summonerName}</h3>
               </div>
             </div>
-            <h2>{this.getParams().server}</h2>
-            <h2>{this.getParams().summonerName}</h2>
-            <h2>Level: {this.state.summonerInfoData.summonerLevel}</h2>
+            
           </div>
         </div>
         {/** CONTENT PART END */}
