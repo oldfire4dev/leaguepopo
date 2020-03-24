@@ -5,7 +5,6 @@ const port = process.env.PORT || 8000;
 
 const { getChampionFreeWeek } = require('./api/champion_v3/index')
 
-
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 

@@ -1,7 +1,7 @@
 const { Kayn, REGIONS } = require('kayn');
 
 module.exports = {
-    kaynObject: Kayn('RGAPI-719ced7a-6219-486f-aa93-acc42c4380ec')({
+    kaynObject: Kayn("RGAPI-f84120c7-9c8f-475d-890c-f0692fd50849")({
       region: REGIONS.BRAZIL,
       apiURLPrefix: 'https://%s.api.riotgames.com',
       locale: 'pt_BR',
