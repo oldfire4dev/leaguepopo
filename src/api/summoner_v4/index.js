@@ -1,28 +1,55 @@
 const kayn = require('./../setting');
+const fetch = require('node-fetch')
 
 getSummonerInfo = (req, res) => {
   const {server} = req.params;
   const urlProfileIcon = 'http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/';
   getSummonerId(req).then(data => {
-    getSummonerLeague(server, data.id).then( league => {
-      getSummonerMatch(server, data.id).then( body => {
-        console.log(data)
-        const summonerInfo = {data, body, league};
+    getSummonerLeague(server, data.id).then(league => {
+      getSummonerMatch(server, data.accountId).then(match => {
+
+        let value;
+        match.matches.forEach(matchIds => {
+            value = global.getSummonerMatchInfos(matchIds.gameId).then(matchInfo => {
+            // const tftmatch = `https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/L4YT-Xjeczf4h6eJTqiMv2VLEGnDezs3e3glj73gnTcbj6JfHHHSLa-grdZICrQj6Dl6Uc-Dmg90xA/ids?count=20&api_key=RGAPI-f84120c7-9c8f-475d-890c-f0692fd50849`
+            // fetch(tftmatch)
+            // .then(response => response.json())
+            // .then(match => console.log(match))    
+            window.testing = matchInfo
+            
+          })
+          
+        })
+        
+        console.log(window.testing)
+
         res.json({
           summonerId: data.id,
           summonerName: data.name,
           summonerLevel: data.summonerLevel,
           ImgURL: urlProfileIcon+data.profileIconId+'.png',
           league,
+        });
 
-          });
+
       }).catch(err => console.log(err))
     }).catch(err => console.log(err))
   }).catch(err => console.log(err))
 }
 
+
+getMatchInfosObject = async (m) => {
+  const matches = await m
+  return matches
+} 
+
+getSummonerMatchInfos = async (id) => {
+  return await kayn.kaynObject.Match.get(id)
+}
+
+
 getSummonerMatch = async (server, id) => {
-  return await kayn.kaynObject.Summoner.by.id(id).region(kayn.regions[server]);
+  return await kayn.kaynObject.Matchlist.by.accountID(id).region(kayn.regions[server])
 }
 
 getSummonerLeague = async (server, id) => {
