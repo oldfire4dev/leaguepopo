@@ -8,27 +8,27 @@
     {
       "id": 2,
       "serverId": "EUNE",
-      "region": "EUROPE NORDIC & EAST"
+      "region": "EUROPE"
     },
     {
       "id": 3,
       "serverId": "EUW",
-      "region": "EUROPE WEST"
+      "region": "EUROPE_WEST"
     },
     {
       "id": 4,
       "serverId": "LAN",
-      "region": "LATIN AMERICA NORTH"
+      "region": "LATIN_AMERICA_NORTH"
     },
     {
       "id": 5,
       "serverId": "LAS",
-      "region": "LATIN AMERICA SOUTH"
+      "region": "LATIN_AMERICA_SOUTH"
     },
     {
       "id": 6,
       "serverId": "NA",
-      "region": "NORTH AMERICA"
+      "region": "NORTH_AMERICA"
     },
     {
       "id": 7,
@@ -51,24 +51,9 @@
       "region": "JAPAN"
     },
     {
-      "id": 11,
-      "serverId": "SEA",
-      "region": "GARENA SOUTH EAST ASIA"
-    },
-    {
       "id": 12,
       "serverId": "KR",
-      "region": "REPUBLIC OF KOREA"
-    },
-    {
-      "id": 13,
-      "serverId": "CN",
-      "region": "PEOPLE'S REPUBLIC OF CHINA"
-    },
-    {
-      "id": 14,
-      "serverId": "PBE",
-      "region": "PUBLIC BETA ENVIRONMENT"
+      "region": "KOREA"
     }
   ]
 }

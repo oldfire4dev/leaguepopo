@@ -1,4 +1,4 @@
-const kayn = require('./../setting')
+const kayn = require('./../setting');
 
 getSummonerInfo = (req, res) => {
   const {server, summonerName} = req.params;
