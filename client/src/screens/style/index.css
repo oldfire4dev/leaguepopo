@@ -12,6 +12,14 @@
   --link-color-secondary: #f9f9f9;
   --link-color-secondary-dark: #adadad;
   --link-color-tertiary:#877bff;
+
+  --champion-level-0: #adc7c9;
+  --champion-level-30: #4c8522;
+  --champion-level-50: #1728d7;
+  --champion-level-75: #f49c3f;
+  --champion-level-100: #cea651;
+  --champion-level-150: #5ed9f9;
+  --champion-level-175: #714f14;
 }
 
 @font-face{

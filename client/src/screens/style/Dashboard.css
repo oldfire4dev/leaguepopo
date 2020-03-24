@@ -21,6 +21,10 @@ a {
   margin-top: 1.5rem;
   margin-left: 1.45rem;
 }
+.summoner-img{
+  width: 128px;
+  height: 128px;
+}
 .summoner-level{
   position: absolute;
   cursor: default;

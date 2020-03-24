@@ -4,7 +4,7 @@ const kayn = require('./../setting');
 getChampionFreeWeek = async (req, res) => {
 
   const body = await kayn.kaynObject.DDragon.Champion.listDataByIdWithParentAsId()
-  const ids = await kayn.kaynObject.Champion.Rotation.list().region(kayn.regions.BRAZIL)
+  const ids = await kayn.kaynObject.Champion.Rotation.list().region(kayn.regions.NORTH_AMERICA)
   
   var names = [];
 

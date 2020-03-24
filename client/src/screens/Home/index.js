@@ -11,6 +11,7 @@ import {
   ListGroup, Card
 } from 'react-bootstrap';
 
+import LeaguePoPoAPI from './../../service/api';
 
 import {
   Link
@@ -54,15 +55,14 @@ export default class Home extends Component {
   }
 
   sendToSummonerV4API = async () => {
-    const send_to_api = await fetch(`/dashboard/${this.state.server}/${this.state.summonerName}`);
-    return send_to_api;
+    const send_to_api = await LeaguePoPoAPI.post(`/dashboard/${this.state.server}/${this.state.summonerName}`);
+    return send_to_api.data;
   }
 
   championV3 = async () => {
-    let request = await fetch('/champion/freeweek');
-    let body = await request.json();
-    if (request.status !== 200) throw Error(body.message);
-    return body;
+    let body = await LeaguePoPoAPI.get('/champion/freeweek');
+    if (body.status !== 200) throw Error(body.statusText);
+    return body.data;
   }
 
   componentDidMount = () => {
@@ -71,12 +71,12 @@ export default class Home extends Component {
       let url = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/";
       let test = res.names.map((body, index) => {
         return (
-          <>
+          <div>
             <ListGroup.Item key={index} className="row">
-              <img src={url + body.data.name + '_0.jpg'} alt="Champions Free Week" className="rounded champions-img" />
+              <img src={url + body.data.key + '_0.jpg'} alt="Champions Free Week" className="rounded champions-img" />
               <span className="ml-3 champions-name">{body.data.name}</span>
             </ListGroup.Item>
-          </>
+          </div>
         );
       })
       this.setState({ championFkList: test })
@@ -145,7 +145,7 @@ export default class Home extends Component {
               <div className="row justify-content-center">
                 <h3 style={{ color: '#fff', margin: '5rem 0 5rem 0',}}>Campeões Semanais Grátis</h3>
               </div>
-              <ListGroup className="rounded col-md-11 mx-auto ">
+              <ListGroup className="rounded col-md-11 col-11 mx-auto">
                 {
                 this.state.contentIsLoading?
                   <ListGroup.Item key="1" className="row champions-relative-position">
