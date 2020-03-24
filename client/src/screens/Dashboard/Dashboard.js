@@ -74,6 +74,7 @@ export default class Dashboard extends Component {
             </div>
             <h2>{this.getParams().server}</h2>
             <h2>{this.getParams().summonerName}</h2>
+            <h2>Level: {this.state.summonerInfoData.summonerLevel}</h2>
           </div>
         </div>
         {/** CONTENT PART END */}
