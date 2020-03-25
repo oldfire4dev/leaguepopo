@@ -7,44 +7,33 @@ getSummonerInfo = (req, res) => {
   getSummonerId(req).then(data => {
     getSummonerLeague(server, data.id).then(league => {
       getSummonerMatch(server, data.accountId).then(match => {
-
-        var value;
-        match.matches.forEach(matchIds => {
-            value = getSummonerMatchInfos(matchIds.gameId).then(matchInfo => {
-            // const tftmatch = `https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/L4YT-Xjeczf4h6eJTqiMv2VLEGnDezs3e3glj73gnTcbj6JfHHHSLa-grdZICrQj6Dl6Uc-Dmg90xA/ids?count=20&api_key=RGAPI-f84120c7-9c8f-475d-890c-f0692fd50849`
-            // fetch(tftmatch)
-            // .then(response => response.json())
-            // .then(match => console.log(match))
-            
-          })
-          
-        })
-
-        value.then(response => {
-          console.log(response)
-        })
-
-        res.json({
-          summonerId: data.id,
-          summonerName: data.name,
-          summonerLevel: data.summonerLevel,
-          ImgURL: urlProfileIcon+data.profileIconId+'.png',
-          league,
-        });
-
-
+        getAllSummonerMatchData(match.matches).then(matchInfo=> {
+          res.json({
+            summonerId: data.id,
+            summonerName: data.name,
+            summonerLevel: data.summonerLevel,
+            ImgURL: urlProfileIcon+data.profileIconId+'.png',
+            league,
+            matchInfo
+          });
+        }).catch(err => console.log(err))
       }).catch(err => console.log(err))
     }).catch(err => console.log(err))
   }).catch(err => console.log(err))
 }
 
 
-getMatchInfosObject = async (m) => {
-  const matches = await m
-  return matches
+getAllSummonerMatchData = async (m) => {
+  var array = []
+  var promise = new Promise((resolve, reject) => {
+    m.map(async matchIds => {
+      const matchInfo = await returnMatchParams(matchIds.gameId);
+      resolve(matchInfo)
+    })
+  })
 } 
 
-getSummonerMatchInfos = async (id) => {
+returnMatchParams = async (id) => {
   return await kayn.kaynObject.Match.get(id)
 }
 
@@ -61,6 +50,12 @@ getSummonerId = async (req) => {
   const {server, summonerName} = req.params;
   return await kayn.kaynObject.Summoner.by.name(summonerName).region(kayn.regions[server]);
 }
+
+//         TFT DATA           //
+// const tftmatch = `https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/L4YT-Xjeczf4h6eJTqiMv2VLEGnDezs3e3glj73gnTcbj6JfHHHSLa-grdZICrQj6Dl6Uc-Dmg90xA/ids?count=20&api_key=RGAPI-f84120c7-9c8f-475d-890c-f0692fd50849`
+// fetch(tftmatch)
+// .then(response => response.json())
+// .then(match => console.log(match))
 
 module.exports = {
   getSummonerInfo,

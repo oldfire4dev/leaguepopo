@@ -34,6 +34,8 @@ a {
   top: 9rem;
   background-color: #fff;
   font-weight: 900;
+  width:1.9rem;
+  text-align:center;
   padding:.25rem;
   z-index: 99;
 }
