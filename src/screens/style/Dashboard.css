@@ -39,3 +39,16 @@ a {
   padding:.25rem;
   z-index: 99;
 }
+
+.summoner-league{
+  font-size: .95rem;
+  margin-bottom: auto;
+}
+.summoner-league-tier{
+  font-size: 1.05rem;
+  position: relative;
+  right: .3rem;
+  color:#ffc;
+}
+.win{ color: #9ccc89; }
+.lose{ color: #eaa7a7; }

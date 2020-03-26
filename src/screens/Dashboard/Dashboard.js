@@ -10,6 +10,7 @@ import LeaguePoPoAPI from './../../service/api';
 
 import './../style/Dashboard.css';
 import Loader from './../../components/Loader';
+import ContentLoader from './../../components/ContentLoader';
 import Logo from './../../assets/logo.png'
 
 export default class Dashboard extends Component {
@@ -17,6 +18,7 @@ export default class Dashboard extends Component {
     super(props);
     this.state = { 
       isLoading: true,
+      contentIsLoading: true,
       summonerInfoData: [],
     }
   }
@@ -29,12 +31,18 @@ export default class Dashboard extends Component {
 
   getSummonerInfo = async () => {
     const body = await LeaguePoPoAPI.get(`api/dashboard/${this.getParams().server}/${this.getParams().summonerName}`);
-    this.setState({ summonerInfoData: body.data })
+    return body.data
   }
 
   loader = () => {
     $( document ).ready(() => {
       this.setState({ isLoading: false });
+    })
+  }
+
+  contentLoader = () => {
+    $( document ).ready(() => {
+      this.setState({ contentIsLoading: false })
     })
   }
 
@@ -59,7 +67,31 @@ export default class Dashboard extends Component {
 
   componentDidMount = () => {
     this.loader();
-    this.getSummonerInfo();
+    this.getSummonerInfo().then(summonerInfoData => {
+      let summonerData = summonerInfoData.map((body, index) => {
+        console.log(body)
+        return (
+          <div key={index}>
+            <div className="row">
+              <img className="rounded-circle summoner-img" src={body.ImgURL} alt="Summoner Profile Icon" />
+              <span className="summoner-level rounded-circle" style={this.getChampionLevelColor()} >{body.summonerLevel}</span>
+            </div>
+            <div className="row justify-content-between">
+              <div>
+                <h3 className="summoner-name" >{body.summonerName}</h3>
+              </div>
+              <div className="mt-4">
+                <p className="summoner-league-tier"><strong>{body.league.tier} {body.league.rank}</strong></p>
+                <p className="summoner-league win" >Vitórias: {body.league.wins}</p>
+                <p className="summoner-league lose" >Derrotas: {body.league.losses}</p>
+              </div>
+            </div>
+          </div>
+        );
+      })
+      this.setState({ summonerInfoData: summonerData })
+      this.contentLoader();
+    })
   }
 
   render() {
@@ -89,13 +121,11 @@ export default class Dashboard extends Component {
         <div className="content container-fluid">
           <div className="row justify-content-center">
             <div className="col-md-11 col-sm-11 col-12 summoner-info-area">
-              <div className="row">
-                <img className="rounded-circle summoner-img" src={this.state.summonerInfoData.ImgURL} alt="Summoner Profile Icon" />
-                <span className="summoner-level rounded-circle" style={this.getChampionLevelColor()} >{this.state.summonerInfoData.summonerLevel}</span>
-              </div>
-              <div>
-                <h3 className="summoner-name" >{this.state.summonerInfoData.summonerName}</h3>
-              </div>
+              {this.state.contentIsLoading?
+                <ContentLoader />
+                :
+                this.state.summonerInfoData
+              }
             </div>
             
           </div>
