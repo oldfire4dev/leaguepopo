@@ -67,29 +67,31 @@ export default class Dashboard extends Component {
 
   componentDidMount = () => {
     this.loader();
-    this.getSummonerInfo().then(summonerInfoData => {
-      let summonerData = summonerInfoData.map((body, index) => {
-        console.log(body)
-        return (
-          <div key={index}>
-            <div className="row">
-              <img className="rounded-circle summoner-img" src={body.ImgURL} alt="Summoner Profile Icon" />
-              <span className="summoner-level rounded-circle" style={this.getChampionLevelColor()} >{body.summonerLevel}</span>
-            </div>
-            <div className="row justify-content-between">
-              <div>
-                <h3 className="summoner-name" >{body.summonerName}</h3>
+    this.getSummonerInfo().then(data => {
+      if(data) {
+        let summonerData = data.map((body, index) => {
+          console.log(body)
+          return (
+            <div key={index}>
+              <div className="row">
+                <img className="rounded-circle summoner-img" src={body.ImgURL} alt="Summoner Profile Icon" />
+                <span className="summoner-level rounded-circle" style={this.getChampionLevelColor()} >{body.summonerLevel}</span>
               </div>
-              <div className="mt-4">
-                <p className="summoner-league-tier"><strong>{body.league.tier} {body.league.rank}</strong></p>
-                <p className="summoner-league win" >Vitórias: {body.league.wins}</p>
-                <p className="summoner-league lose" >Derrotas: {body.league.losses}</p>
+              <div className="row justify-content-between">
+                <div>
+                  <h3 className="summoner-name" >{body.summonerName}</h3>
+                </div>
+                <div className="mt-4">
+                  <p className="summoner-league-tier"><strong>{body.league.tier} {body.league.rank}</strong></p>
+                  <p className="summoner-league win" >Vitórias: {body.league.wins}</p>
+                  <p className="summoner-league lose" >Derrotas: {body.league.losses}</p>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })
-      this.setState({ summonerInfoData: summonerData })
+          );
+        })
+        this.setState({ summonerInfoData: summonerData })
+      }
       this.contentLoader();
     })
   }
