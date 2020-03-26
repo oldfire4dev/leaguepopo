@@ -55,12 +55,12 @@ export default class Home extends Component {
   }
 
   sendToSummonerV4API = async () => {
-    const send_to_api = await LeaguePoPoAPI.post(`/dashboard/${this.state.server}/${this.state.summonerName}`);
+    const send_to_api = await LeaguePoPoAPI.post(`api/dashboard/${this.state.server}/${this.state.summonerName}`);
     return send_to_api.data;
   }
 
   championV3 = async () => {
-    let body = await LeaguePoPoAPI.get('/champion/freeweek');
+    let body = await LeaguePoPoAPI.get('api/champion/freeweek');
     if (body.status !== 200) throw Error(body.statusText);
     return body.data;
   }

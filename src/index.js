@@ -1,18 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const router = express.Router();
-const port = process.env.PORT || 8000;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './router.js';
+import * as serviceWorker from './serviceWorker';
 
-const { getChampionFreeWeek } = require('./api/champion_v3');
-const { getSummonerInfo } = require('./api/summoner_v4');
+ReactDOM.render(<App />, document.getElementById('app'));
 
-app.use(cors())
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static('public'))
-
-app.get('/champion/freeweek', getChampionFreeWeek)
-
-app.get('/dashboard/:server/:summonerName', getSummonerInfo);
-
-app.listen(port, () => console.log(`Server running at 'http://localhost:${port}/'`));
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

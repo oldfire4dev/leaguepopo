@@ -1,32 +1,41 @@
 {
-  "name": "leaguepopo-api",
-  "version": "0.0.1",
-  "description": "LeaguePoPo API",
-  "main": "src/index.js",
-  "scripts": {
-    "client": "cd client && npm start",
-    "server": "nodemon src/index.js",
-    "start": "node src/index.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
-  },
+  "name": "leaguepopo",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "axios": "^0.19.2",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "kayn": "0.10.2",
-    "node-fetch": "^2.6.0"
+    "@material-ui/core": "^4.9.5",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "react": "^16.13.0",
+    "react-bootstrap": "^1.0.0-beta.17",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "react-transition-group": "^4.3.0",
+    "redis-parser": "3.0.0"
   },
-  "devDependencies": {
-    "concurrently": "^5.1.0"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fire4dev/leaguepopo.git"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "author": "Fire4Dev <fire4dev@gmail.com> (https://github.com/fire4dev/leaguepopo)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fire4dev/leaguepopo/issues"
-  },
-  "homepage": "https://github.com/fire4dev/leaguepopo#readme"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

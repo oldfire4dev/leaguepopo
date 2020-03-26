@@ -28,7 +28,7 @@ export default class Dashboard extends Component {
   }
 
   getSummonerInfo = async () => {
-    const body = await LeaguePoPoAPI.get(`/dashboard/${this.getParams().server}/${this.getParams().summonerName}`);
+    const body = await LeaguePoPoAPI.get(`api/dashboard/${this.getParams().server}/${this.getParams().summonerName}`);
     this.setState({ summonerInfoData: body.data })
   }
 
