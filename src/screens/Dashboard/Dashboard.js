@@ -20,17 +20,23 @@ export default class Dashboard extends Component {
       isLoading: true,
       contentIsLoading: true,
       summonerInfoData: [],
+      summonerData: null
     }
   }
 
-  getParams = () => {
+  getQuery = () => {
     let server = this.props.query.get('server');
     let summonerName = this.props.query.get('summonerName');
     return { server, summonerName }
   }
 
+  getParams = () => {
+    let summonerData = this.props.summonerData.summonerData
+    this.setState({ summonerData })
+  }
+
   getSummonerInfo = async () => {
-    const body = await LeaguePoPoAPI.get(`api/dashboard/${this.getParams().server}/${this.getParams().summonerName}`);
+    const body = await LeaguePoPoAPI.get(`api/dashboard/${this.getQuery().server}/${this.getQuery().summonerName}`);
     return body.data
   }
 
@@ -67,6 +73,7 @@ export default class Dashboard extends Component {
 
   componentDidMount = () => {
     this.loader();
+    this.getParams();
     this.getSummonerInfo().then(data => {
       if(data) {
         let summonerData = data.map((body, index) => {
@@ -97,6 +104,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
+    console.log(this.state.summonerData)
     return (
       this.state.isLoading ?
       <Loader/> 

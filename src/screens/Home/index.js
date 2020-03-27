@@ -30,7 +30,8 @@ export default class Home extends Component {
       contentIsLoading: true,
       summonerName: null,
       server: 'Servidor',
-      championFkList: null
+      championFkList: null,
+      summonerData: null
     }
   }
 
@@ -55,8 +56,8 @@ export default class Home extends Component {
   }
 
   sendToSummonerV4API = async () => {
-    const send_to_api = await LeaguePoPoAPI.post(`api/dashboard/${this.state.server}/${this.state.summonerName}`);
-    return send_to_api.data;
+    const send_to_api = await LeaguePoPoAPI.get(`api/dashboard/${this.state.server}/${this.state.summonerName}`);
+    this.setState({ summonerData: send_to_api.data });
   }
 
   championV3 = async () => {
@@ -127,14 +128,13 @@ export default class Home extends Component {
                   {ServerList.Servers.map((res) => 
                     <Dropdown.Item key={res.id} onClick={() => {this.getServer(res.region)}}>{res.serverId}</Dropdown.Item>
                   )}
-                  <Dropdown.Item href="#">Another action</Dropdown.Item>
                 </DropdownButton>
                 <FormControl name="summonerName" aria-describedby="basic-addon1" placeholder="Invocador" title="Nome do invocador" onChange={(val) => { this.getSummoner(val.target.value) }} />
               </InputGroup>
             </div>
             <div className="ml-3 wrap">
-              <Link to={`/dashboard?server=${this.state.server}&summonerName=${this.state.summonerName}`} >
-                <button className='btn-go' onClick={() => this.sendToSummonerV4API()}>
+              <Link to={{pathname: `dashboard?server=${this.state.server}&summonerName=${this.state.summonerName}`, params: this.state.summonerData}} onClick={() => this.sendToSummonerV4API()}>
+                <button className='btn-go'>
                   Buscar
                 </button>
               </Link>

@@ -9,6 +9,6 @@ function useQuery() {
 export default function DashboardQuery ({match}) {
     const query = useQuery();
     return (
-      <Dashboard query={query} />
+      <Dashboard query={query} summonerData={match.params} />
     );
 }
